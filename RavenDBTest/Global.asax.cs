@@ -26,7 +26,8 @@ namespace RavenDBTest
 
 			RegisterRoutes(RouteTable.Routes);
 
-			DocumentStore = new DocumentStore { Url = "https://2.ravenhq.com/databases/AppHarbor_df299464-a728-4935-b5c7-4ac4626bdc4a;ApiKey=24cee556-b25f-4701-a572-6ca9791b007a" };
+			DocumentStore = new DocumentStore { Url = "https://2.ravenhq.com/databases/AppHarbor_df299464-a728-4935-b5c7-4ac4626bdc4a",
+				ApiKey = "24cee556-b25f-4701-a572-6ca9791b007a" };
 			DocumentStore.Initialize();
 		}
 	}
