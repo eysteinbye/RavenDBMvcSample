@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System;
 using System.Web.Mvc;
 using Raven.Client;
 using RavenDBTest.Model;
@@ -7,9 +7,19 @@ namespace RavenDBTest.Controllers
 {
 	public class ThingyController : Controller
 	{
+		private Lazy<IDocumentSession> _lazyDocumentSession = new Lazy<IDocumentSession>(() => MvcApplication.DocumentStore.OpenSession());
+
+		private IDocumentSession DocumentSession
+		{
+			get
+			{
+				return _lazyDocumentSession.Value;
+			}
+		}
+
 		public ActionResult Index()
 		{
-			return View(DocumentSession.Query<Thingy>().ToList());
+			return View(DocumentSession.Query<Thingy>());
 		}
 
 		public ActionResult New()
@@ -19,18 +29,10 @@ namespace RavenDBTest.Controllers
 
 		public ActionResult Create(Thingy thingy)
 		{
-			var session = DocumentSession;
-			session.Store(thingy);
-			session.SaveChanges();
+			DocumentSession.Store(thingy);
+			DocumentSession.SaveChanges();
 
 			return RedirectToAction("Index");
-		}
-
-		private IDocumentSession DocumentSession
-		{
-			get {
-				return MvcApplication.DocumentStore.OpenSession();
-			}
 		}
 	}
 }
