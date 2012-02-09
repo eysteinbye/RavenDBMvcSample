@@ -1,0 +1,17 @@
+﻿@model IEnumerable<RavenDBTest.Model.Thingy>
+
+@{
+	ViewBag.Title = "ViewPage1";
+}
+
+<h2>ViewPage1</h2>
+<ul>
+	@foreach (var thingy in Model)
+	{
+		<li>@thingy.Name</li>
+	}
+</ul>
+
+<p>
+	@Html.ActionLink("Create new thingy", "New")
+</p>
