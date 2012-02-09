@@ -19,6 +19,7 @@ namespace RavenDBTest.Controllers
 		public ActionResult Create(Thingy thingy)
 		{
 			DocumentSession.Store(thingy);
+			DocumentSession.SaveChanges();
 			return RedirectToAction("Index");
 		}
 
