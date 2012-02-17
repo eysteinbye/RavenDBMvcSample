@@ -1,7 +1,6 @@
-﻿using System.Configuration;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
+using Raven.Abstractions.Data;
 using Raven.Client.Document;
 
 namespace RavenDBTest
@@ -27,10 +26,14 @@ namespace RavenDBTest
 
 			RegisterRoutes(RouteTable.Routes);
 
-			var connectionString = ConfigurationManager.ConnectionStrings["RavenDB"].ConnectionString;
+			var parser = ConnectionStringParser<RavenConnectionStringOptions>.FromConnectionStringName("RavenDB");
 
-			Store = new DocumentStore();
-			Store.ParseConnectionString(connectionString);
+			Store = new DocumentStore
+			{
+				ApiKey = parser.ConnectionStringOptions.ApiKey,
+				Url = parser.ConnectionStringOptions.Url,
+			};
+
 			Store.Initialize();
 		}
 	}
