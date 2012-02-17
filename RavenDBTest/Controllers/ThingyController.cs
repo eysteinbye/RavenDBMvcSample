@@ -21,5 +21,12 @@ namespace RavenDBTest.Controllers
 
 			return RedirectToAction("Index");
 		}
+
+		public ActionResult Config()
+		{
+			ViewBag.ApiKey = MvcApplication.Store.ApiKey;
+			ViewBag.Url = MvcApplication.Store.Url;
+			return View();
+		}
 	}
 }
