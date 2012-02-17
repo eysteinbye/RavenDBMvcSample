@@ -31,8 +31,8 @@ namespace RavenDBTest
 
 			Store = new DocumentStore
 			{
-				ApiKey = connectionString.Split(';').Last(),
-				Url = connectionString.Split(';').First(),
+				ApiKey = connectionString.Split(';').Last().Split('=').Last(),
+				Url = connectionString.Split(';').First().Split('=').Last(),
 			};
 
 			Store.Initialize();
