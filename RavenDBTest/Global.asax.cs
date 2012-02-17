@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 using Raven.Client.Document;
 
@@ -7,7 +6,7 @@ namespace RavenDBTest
 {
 	public class MvcApplication : System.Web.HttpApplication
 	{
-		public static DocumentStore DocumentStore { get; set; }
+		public static DocumentStore Store { get; set; }
 
 		public static void RegisterRoutes(RouteCollection routes)
 		{
@@ -26,8 +25,8 @@ namespace RavenDBTest
 
 			RegisterRoutes(RouteTable.Routes);
 
-			DocumentStore = new DocumentStore { ConnectionStringName = "RavenDB" };
-			DocumentStore.Initialize();
+			Store = new DocumentStore { ConnectionStringName = "RavenDB" };
+			Store.Initialize();
 		}
 	}
 }
