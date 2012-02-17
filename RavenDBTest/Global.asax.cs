@@ -29,12 +29,8 @@ namespace RavenDBTest
 
 			var connectionString = ConfigurationManager.ConnectionStrings["RavenDB"].ConnectionString;
 
-			Store = new DocumentStore
-			{
-				ApiKey = connectionString.Split(';').Last().Split('=').Last(),
-				Url = connectionString.Split(';').First().Split('=').Last(),
-			};
-
+			Store = new DocumentStore();
+			Store.ParseConnectionString(connectionString);
 			Store.Initialize();
 		}
 	}
