@@ -24,6 +24,7 @@ namespace RavenDBTest.Controllers
 			using (var session = MvcApplication.Store.OpenSession())
 			{
 				session.Store(thingy);
+				session.SaveChanges();
 			}
 
 			return RedirectToAction("Index");
