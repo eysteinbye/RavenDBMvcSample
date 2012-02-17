@@ -1,13 +1,17 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using RavenDBTest.Model;
 
 namespace RavenDBTest.Controllers
 {
-	public class ThingyController : BaseController
+	public class ThingyController : Controller
 	{
 		public ActionResult Index()
 		{
-			return View(RavenSession.Query<Thingy>());
+			using (var session = MvcApplication.Store.OpenSession())
+			{
+				return View(session.Query<Thingy>());
+			}
 		}
 
 		public ActionResult New()
@@ -17,7 +21,10 @@ namespace RavenDBTest.Controllers
 
 		public ActionResult Create(Thingy thingy)
 		{
-			RavenSession.Store(thingy);
+			using (var session = MvcApplication.Store.OpenSession())
+			{
+				session.Store(thingy);
+			}
 
 			return RedirectToAction("Index");
 		}
