@@ -27,6 +27,7 @@ namespace RavenDBTest
 			RegisterRoutes(RouteTable.Routes);
 
 			var parser = ConnectionStringParser<RavenConnectionStringOptions>.FromConnectionStringName("RavenDB");
+			parser.Parse();
 
 			Store = new DocumentStore
 			{
